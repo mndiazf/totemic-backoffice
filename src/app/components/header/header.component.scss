@@ -1,0 +1,31 @@
+.header {
+    background-color: rgb(1, 139, 49);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    img{
+        width: 120px;
+    }
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-button:hover {
+    transform: rotate(90deg);
+  }
+  

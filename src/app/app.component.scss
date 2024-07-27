@@ -1,0 +1,19 @@
+.content {
+    margin-top: 50px; /* Ajustar para estar debajo del header */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* Solo aplicar margen a la izquierda cuando el sidebar está abierto en pantallas grandes */
+  @media (min-width: 768px) {
+    .content.shifted {
+      margin-left: 250px;
+    }
+  }
+  
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+  }
+  
