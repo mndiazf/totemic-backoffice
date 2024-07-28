@@ -1,0 +1,42 @@
+<h2>Agregar Categoría</h2>
+<form [formGroup]="categoryForm" (ngSubmit)="onSave()">
+  <div class="form-group">
+    <label for="title">Título</label>
+    <input id="title" formControlName="title" class="form-control" />
+    <div *ngIf="categoryForm.get('title')?.invalid && categoryForm.get('title')?.touched" class="error">
+      El título es requerido.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Descripción</label>
+    <input id="description" formControlName="description" class="form-control" />
+    <div *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched" class="error">
+      La descripción es requerida.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="imageUrl">URL de la Imagen</label>
+    <input id="imageUrl" formControlName="imageUrl" class="form-control" />
+    <div *ngIf="categoryForm.get('imageUrl')?.invalid && categoryForm.get('imageUrl')?.touched" class="error">
+      La URL de la imagen es requerida.
+    </div>
+  </div>
+  <div class="form-control-switch">
+    <label for="isEnabled" class="switch-label">Habilitado</label>
+    <label class="switch">
+      <input id="isEnabled" type="checkbox" formControlName="isEnabled" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <div class="form-control-switch">
+    <label for="showTotem" class="switch-label">Mostrar Totem</label>
+    <label class="switch">
+      <input id="showTotem" type="checkbox" formControlName="showTotem" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="btn" (click)="onCancel()">Cancelar</button>
+    <button type="submit" class="btn" [disabled]="categoryForm.invalid">Guardar</button>
+  </div>
+</form>

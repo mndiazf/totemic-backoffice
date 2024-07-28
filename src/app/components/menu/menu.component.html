@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li><a routerLink="category" routerLinkActive="active">Category</a></li>
+    <li><a routerLink="product" routerLinkActive="active">Product</a></li>
+    <li><a routerLink="product-variation" routerLinkActive="active">Product Variation</a></li>
+  </ul>
+</nav>
+
+<div class="store-select">
+  <label for="storeSelect">Select a Store:</label>
+  <select id="storeSelect" [(ngModel)]="selectedStoreId" (change)="onStoreChange($event)">
+    <option value="">-- Select a Store --</option>
+    <option *ngFor="let store of stores" [value]="store.id">{{ store.name }}</option>
+  </select>
+</div>
+
+<router-outlet></router-outlet>
+
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>

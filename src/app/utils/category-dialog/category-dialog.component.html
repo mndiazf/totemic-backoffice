@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Ordenar Categorías</h2>
+<mat-dialog-content>
+  <div cdkDropList
+       [cdkDropListData]="categories"
+       (cdkDropListDropped)="onDrop($event)"
+       class="sortable-list">
+    <div *ngFor="let category of categories"
+         cdkDrag
+         class="sortable-item">
+      <img [src]="category.imageUrl" alt="{{ category.title }}" class="category-image">
+      <div class="category-details">
+        <h3>{{ category.title }}</h3>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

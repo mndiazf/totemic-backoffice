@@ -1,0 +1,63 @@
+nav {
+  background-color: rgb(1, 139, 49);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: left;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0 15px;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+
+        &:hover,
+        &.active {
+          background-color: rgb(0, 93, 33);
+        }
+      }
+    }
+  }
+}
+
+.store-select {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: rgb(0, 93, 33);
+    }
+  }
+}
+
+.error-message {
+  margin-top: 20px;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}

@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 interface User {
   username: string;
@@ -24,13 +26,41 @@ export class AuthService {
   private readonly HTTP_OPTIONS = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  
-  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient, private router: Router) { }
+  private loggedIn = new BehaviorSubject<boolean>(this.hasValidToken());
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   private hasToken(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  private decodeToken(token: string): any {
+    try {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+  private hasValidToken(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+
+    const decodedToken = this.decodeToken(token);
+    if (!decodedToken || !decodedToken.exp) {
+      return false;
+    }
+
+    const currentTime = Math.floor(Date.now() / 1000);
+    return currentTime < decodedToken.exp;
   }
 
   get isLoggedIn$(): Observable<boolean> {
@@ -62,9 +92,13 @@ export class AuthService {
     );
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
+  }
+
+  public updateLoggedInStatus(): void {
+    this.loggedIn.next(this.hasValidToken());
   }
 }
