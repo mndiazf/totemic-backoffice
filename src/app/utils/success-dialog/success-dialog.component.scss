@@ -1,0 +1,46 @@
+/* Estilos para el diálogo de éxito */
+mat-dialog-container {
+    padding: 24px; /* Añadir padding para darle espacio al contenido */
+    border-radius: 8px; /* Borde redondeado */
+    max-width: 600px; /* Ancho máximo del diálogo */
+    width: 100%; /* Ancho completo del contenedor */
+    text-align: center; /* Centrar el contenido del texto */
+  }
+  
+  mat-dialog-title {
+    font-size: 24px; /* Ajustar tamaño de la fuente */
+    font-weight: 600;
+    color: #388e3c; /* Color verde oscuro */
+    margin-bottom: 16px; /* Margen inferior para separar el título del contenido */
+    text-align: center; /* Centrar el título */
+  }
+  
+  mat-dialog-content {
+    font-size: 16px; /* Ajustar tamaño de la fuente */
+    color: #555;
+    margin-bottom: 24px; /* Margen inferior para separar el contenido de las acciones */
+    text-align: center; /* Centrar el contenido del texto */
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: center; /* Centrar el botón */
+  }
+  
+  button {
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    padding: 12px 36px; /* Ajustar el padding del botón */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px; /* Ajustar tamaño de la fuente */
+    font-weight: 600;
+    transition: background-color 0.3s;
+    margin: 0 auto; /* Asegurar que el botón esté centrado */
+  }
+  
+  button:hover {
+    background-color: #2e7d32;
+  }
+  

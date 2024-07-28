@@ -1,0 +1,93 @@
+/* Estilos del contenedor principal */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f9fc; /* Fondo claro */
+  font-family: 'Arial', sans-serif; /* Fuente elegante */
+}
+
+/* Estilos de la tarjeta de login */
+.login-card {
+  width: 400px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Fondo blanco */
+}
+
+/* Estilos del título */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333333; /* Texto oscuro */
+  margin-bottom: 20px;
+  font-weight: 600; /* Peso de fuente */
+}
+
+/* Estilos del grupo de formularios */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Estilos de los labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555555; /* Color del texto */
+  font-size: 14px;
+  font-weight: 500; /* Peso de fuente */
+}
+
+/* Estilos de los inputs */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dddddd; /* Borde claro */
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #388e3c; /* Borde verde oscuro en foco */
+  outline: none;
+}
+
+/* Estilos del botón */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #388e3c; /* Fondo verde oscuro */
+  color: #ffffff; /* Texto blanco */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600; /* Peso de fuente */
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2e7d32; /* Fondo verde oscuro más intenso en hover */
+}
+
+.btn-primary:disabled {
+  background-color: #a5d6a7; /* Fondo verde claro cuando está deshabilitado */
+  cursor: not-allowed;
+}
+
+/* Estilos de los errores */
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+/* Estilos de mensajes de error generales */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}

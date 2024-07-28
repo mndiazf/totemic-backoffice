@@ -1,7 +1,5 @@
 <app-header (sidebarToggle)="toggleSidebar()"></app-header>
 <app-sidebar [isOpen]="isSidebarOpen"></app-sidebar>
 <div class="content" [class.shifted]="isSidebarOpen">
-  <p>Este es el contenido principal de la aplicación.</p>
   <router-outlet></router-outlet>
-
 </div>
