@@ -1,1 +1,50 @@
-<p>product works!</p>
+<div *ngIf="products.length > 0" class="products-container">
+    <div class="header">
+      <h2>Productos</h2>
+      <div class="header-buttons">
+        <input type="text" placeholder="Buscar productos..." [(ngModel)]="searchTerm" (input)="filterProducts()" />
+        <select [(ngModel)]="selectedCategory" (change)="filterProducts()">
+          <option value="">Todas las categorías</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
+        </select>
+        <button class="add-product-button" (click)="openAddProductDialog()">Agregar Producto</button>
+        <button class="sort-products-button" (click)="openSortProductsDialog()">Ordenar Productos</button>
+      </div>
+    </div>
+    <div class="products-list">
+      <div *ngFor="let product of filteredProducts" class="product-card">
+        <img [src]="product.imgUrl" alt="{{ product.name }}" class="product-image">
+        <div class="product-header">
+          <select 
+            [ngModel]="product.isEnabled.toString()" 
+            (change)="toggleProductEnabled(product, $event)" 
+            [ngClass]="{ 'enabled': product.isEnabled, 'disabled': !product.isEnabled }">
+            <option [value]="'true'">Habilitado</option>
+            <option [value]="'false'">Deshabilitado</option>
+          </select>
+          <select 
+            [ngModel]="product.isUpSelling.toString()" 
+            (change)="toggleProductUpSelling(product, $event)" 
+            [ngClass]="{ 'enabled': product.isUpSelling, 'disabled': !product.isUpSelling }">
+            <option [value]="'true'">Is Upselling</option>
+            <option [value]="'false'">No Upselling</option>
+          </select>
+        </div>
+        <div class="product-content">
+          <div class="product-title">
+            <h3>{{ product.name }}</h3>
+            <div class="action-buttons">
+              <button class="edit-button" (click)="openEditProductDialog(product)"></button>
+              <button class="delete-button" (click)="openDeleteProductDialog(product)"></button>
+            </div>
+          </div>
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+  

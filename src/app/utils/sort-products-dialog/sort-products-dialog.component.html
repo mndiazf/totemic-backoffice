@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Ordenar Productos</h2>
+<mat-dialog-content>
+  <div>
+    <select [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
+      <option value="">Todas las categorías</option>
+      <option *ngFor="let category of data.categories" [value]="category.id">{{ category.title }}</option>
+    </select>
+  </div>
+  <div cdkDropList [cdkDropListData]="filteredProducts" (cdkDropListDropped)="onDrop($event)" class="sortable-list">
+    <div *ngFor="let product of filteredProducts" cdkDrag class="sortable-item">
+      <img [src]="product.imgUrl" alt="{{ product.name }}" class="product-image">
+      <div class="product-details">
+        <h3>{{ product.name }}</h3>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

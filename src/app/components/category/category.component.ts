@@ -101,8 +101,7 @@ export class CategoryComponent {
     if (!this.selectedStoreId) return;
     const dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       data: { categories: this.categories, storeId: this.selectedStoreId },
-      height: '720px', // Altura del diálogo
-      width: '300px', // Ancho del diálogo
+      width: '600px', // Ancho del diálogo
       disableClose: true
     });
 
@@ -118,7 +117,7 @@ export class CategoryComponent {
   openEditCategoryDialog(category: Category): void {
     const dialogRef = this.dialog.open(EditCategoryDialogComponent, {
       data: { category },
-      width: '300px', // Ancho del diálogo
+      width: '600px', // Ancho del diálogo
       disableClose: true
     
     });
