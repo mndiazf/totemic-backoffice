@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>Agregar Variación de Producto</h2>
+<div class="form-scroll-container">
+  <form [formGroup]="variationForm" (ngSubmit)="onSave()">
+    <div class="form-group">
+      <label for="category">Categoría</label>
+      <select id="category" formControlName="categoryId" class="form-control" (change)="onCategoryChange()">
+        <option value="">Selecciona una categoría</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="products.length > 0">
+      <label for="product">Producto</label>
+      <select id="product" formControlName="productId" class="form-control">
+        <option value="">Selecciona un producto</option>
+        <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+      </select>
+    </div>
+
+    <div formArrayName="options">
+      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="option-group">
+        <h3>Opción {{ i + 1 }}</h3>
+        <div class="form-group">
+          <label for="name">Nombre de la Opción</label>
+          <input id="name" formControlName="name" class="form-control" />
+          <div *ngIf="option.get('name')?.invalid && option.get('name')?.touched" class="error">
+            El nombre es requerido.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="basePrice">Precio Base</label>
+          <input id="basePrice" formControlName="basePrice" class="form-control" type="number" />
+          <div *ngIf="option.get('basePrice')?.invalid && option.get('basePrice')?.touched" class="error">
+            El precio base es requerido.
+          </div>
+        </div>
+
+        <div formArrayName="characteristics">
+          <div *ngFor="let characteristic of getCharacteristics(i).controls; let j = index" [formGroupName]="j" class="characteristic-group">
+            <h4>Característica {{ j + 1 }}</h4>
+            <div class="form-group">
+              <label for="characteristicName">Nombre de la Característica</label>
+              <input id="characteristicName" formControlName="name" class="form-control" />
+              <div *ngIf="characteristic.get('name')?.invalid && characteristic.get('name')?.touched" class="error">
+                El nombre es requerido.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="extraPrice">Precio Extra</label>
+              <input id="extraPrice" formControlName="extraPrice" class="form-control" type="number" />
+              <div *ngIf="characteristic.get('extraPrice')?.invalid && characteristic.get('extraPrice')?.touched" class="error">
+                El precio extra es requerido.
+              </div>
+            </div>
+            <button type="button" (click)="removeCharacteristic(i, j)">Eliminar Característica</button>
+          </div>
+        </div>
+
+        <button type="button" (click)="addCharacteristic(i)">Agregar Característica</button>
+        <button type="button" (click)="removeOption(i)">Eliminar Opción</button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addOption()">Agregar Opción</button>
+
+    <div class="form-group">
+      <label for="displayOrder">Orden de Visualización</label>
+      <input id="displayOrder" formControlName="displayOrder" class="form-control" type="number" />
+    </div>
+
+    <div class="form-control-switch">
+      <label for="isEnabled" class="switch-label">Habilitado</label>
+      <label class="switch">
+        <input id="isEnabled" type="checkbox" formControlName="isEnabled" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="btn" (click)="onCancel()">Cancelar</button>
+      <button type="submit" class="btn" [disabled]="variationForm.invalid">Guardar</button>
+    </div>
+  </form>
+</div>

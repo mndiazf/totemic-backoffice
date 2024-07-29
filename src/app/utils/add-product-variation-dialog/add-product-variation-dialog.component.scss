@@ -1,0 +1,173 @@
+mat-dialog-container {
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 20px;
+    margin-top: 16px;
+    font-weight: 600;
+  }
+  
+  .form-scroll-container {
+    max-height: 70vh; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+    padding-right: 1rem; /* Opcional, para dar espacio al scroll */
+  }
+  
+  form {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+  
+  .form-control:focus {
+    border-color: #388e3c;
+    outline: none;
+  }
+  
+  .option-group, .characteristic-group {
+    margin-bottom: 20px;
+    border: 1px solid #dddddd;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #2e7d32;
+  }
+  
+  .form-control-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .switch-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555555;
+  }
+  
+  .btn {
+    padding: 12px;
+    background-color: #388e3c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #2e7d32;
+  }
+  
+  .btn:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #388e3c;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
+  

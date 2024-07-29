@@ -1,38 +1,44 @@
-<div *ngIf="categories.length > 0" class="categories-container">
-    <div class="header">
-      <h2>Categories</h2>
-      <div class="header-buttons">
-        <button class="add-category-button" (click)="openAddCategoryDialog()" [disabled]="!selectedStoreId">Agregar Categoría</button>
-        <button class="sort-categories-button" (click)="openSortDialog()">Ordenar Categorías</button>
-      </div>
-    </div>
-    <div class="categories-list">
-      <div *ngFor="let category of categories" class="category-card">
-        <img [src]="category.imageUrl" alt="{{ category.title }}" class="category-image">
-        <div class="category-header">
-          <select 
-            [ngModel]="category.isEnabled.toString()" 
-            (change)="toggleCategoryEnabled(category, $event)" 
-            [ngClass]="{ 'enabled': category.isEnabled, 'disabled': !category.isEnabled }">
-            <option [value]="'true'">Enabled</option>
-            <option [value]="'false'">Disabled</option>
-          </select>
-        </div>
-        <div class="category-content">
-          <div class="category-title">
-            <h3>{{ category.title }}</h3>
-            <div class="action-buttons">
-              <button class="edit-button" (click)="openEditCategoryDialog(category)"></button>
-              <button class="delete-button" (click)="openDeleteCategoryDialog(category)"></button>
-            </div>
-          </div>
-          <p>{{ category.description }}</p>
-        </div>
-      </div>
-    </div>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
+<div *ngIf="categories.length > 0; else noCategories" class="categories-container">
+  <div class="header">
+    <h2>Categories</h2>
+    <div class="header-buttons">
+      <button class="add-category-button" (click)="openAddCategoryDialog()" [disabled]="!selectedStoreId">Agregar Categoría</button>
+      <button class="sort-categories-button" (click)="openSortDialog()">Ordenar Categorías</button>
     </div>
   </div>
-  
+  <div class="categories-list">
+    <div *ngFor="let category of categories" class="category-card">
+      <img [src]="category.imageUrl" alt="{{ category.title }}" class="category-image">
+      <div class="category-header">
+        <select 
+          [ngModel]="category.isEnabled.toString()" 
+          (change)="toggleCategoryEnabled(category, $event)" 
+          [ngClass]="{ 'enabled': category.isEnabled, 'disabled': !category.isEnabled }">
+          <option [value]="'true'">Enabled</option>
+          <option [value]="'false'">Disabled</option>
+        </select>
+      </div>
+      <div class="category-content">
+        <div class="category-title">
+          <h3>{{ category.title }}</h3>
+          <div class="action-buttons">
+            <button class="edit-button" (click)="openEditCategoryDialog(category)"></button>
+            <button class="delete-button" (click)="openDeleteCategoryDialog(category)"></button>
+          </div>
+        </div>
+        <p>{{ category.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>
+
+<ng-template #noCategories>
+  <div class="no-categories">
+    <h2>No categories available</h2>
+    <button class="add-category-button" (click)="openAddCategoryDialog()" [disabled]="!selectedStoreId">Agregar Categoría</button>
+  </div>
+</ng-template>

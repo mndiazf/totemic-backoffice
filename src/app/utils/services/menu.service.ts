@@ -51,4 +51,6 @@ export class MenuService {
   getStoreIdFromLocalStorage(): string | null {
     return localStorage.getItem('selectedStoreId');
   }
+
+  
 }

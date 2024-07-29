@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProductsDialogComponent } from '../../utils/add-products-dialog/add-products-dialog.component';
 import { EditProductsDialogComponent } from '../../utils/edit-products-dialog/edit-products-dialog.component';
 import { DeleteProductsDialogComponent } from '../../utils/delete-products-dialog/delete-products-dialog.component';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -27,26 +28,43 @@ export class ProductComponent {
   categories: Category[] = [];
   searchTerm: string = '';
   selectedCategory: string = '';
+  selectedStoreId: string | null = null;
   errorMessage: string = '';
 
   constructor(private productService: ProductService, private menuService: MenuService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.menuService.selectedStoreId$.subscribe(storeId => {
+      this.selectedStoreId = storeId;
       if (storeId) {
-        this.productService.getProductsByStore(storeId).subscribe(products => {
-          this.products = products.sort((a, b) => a.displayOrder - b.displayOrder);
-          this.filteredProducts = [...this.products];
-        }, error => {
-          this.errorMessage = 'Error loading products';
-        });
-
-        this.menuService.getCategories(storeId).subscribe(categories => {
-          this.categories = categories;
-        }, error => {
-          this.errorMessage = 'Error loading categories';
-        });
+        this.loadProducts(storeId);
+        this.loadCategories(storeId);
       }
+    });
+  }
+
+  loadProducts(storeId: string): void {
+    this.productService.getProductsByStore(storeId).pipe(
+      catchError(error => {
+        this.errorMessage = 'Error loading products';
+        console.error('Error loading products:', error);
+        return of([]);
+      })
+    ).subscribe(products => {
+      this.products = products.sort((a, b) => a.displayOrder - b.displayOrder);
+      this.filteredProducts = [...this.products];
+    });
+  }
+
+  loadCategories(storeId: string): void {
+    this.menuService.getCategories(storeId).pipe(
+      catchError(error => {
+        this.errorMessage = 'Error loading categories';
+        console.error('Error loading categories:', error);
+        return of([]);
+      })
+    ).subscribe(categories => {
+      this.categories = categories;
     });
   }
 
@@ -86,9 +104,11 @@ export class ProductComponent {
   }
 
   openAddProductDialog(): void {
+    if (!this.selectedStoreId) return;
+
     const dialogRef = this.dialog.open(AddProductsDialogComponent, {
       width: '600px',
-      data: { categories: this.categories, storeId: this.menuService.getStoreIdFromLocalStorage(), products: this.products }
+      data: { categories: this.categories, storeId: this.selectedStoreId, products: this.products }
     });
 
     dialogRef.afterClosed().subscribe((result: Product) => {
@@ -116,7 +136,6 @@ export class ProductComponent {
       }
     });
   }
-  
 
   openDeleteProductDialog(product: Product) {
     const dialogRef = this.dialog.open(DeleteProductsDialogComponent, {

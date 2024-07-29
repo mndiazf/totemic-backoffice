@@ -1,1 +1,51 @@
-<p>product-variation works!</p>
+<div class="product-variations-container">
+    <div class="filter-bar">
+      <input type="text" placeholder="Buscar producto..." [(ngModel)]="searchTerm" (input)="filterProducts()" />
+      <select [(ngModel)]="selectedCategoryId" (change)="filterProducts()">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
+      </select>
+      <button (click)="openAddProductVariationDialog()" [disabled]="!selectedStoreId">Agregar Variación de Producto</button>
+    </div>
+  
+    <div class="content">
+      <div class="products-list">
+        <h2>Productos con Variaciones</h2>
+        <ul>
+          <li *ngFor="let product of filteredProducts" (click)="selectProduct(product)">
+            <img [src]="product.imgUrl" alt="{{ product.name }}" />
+            <div class="product-info">
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.description }}</p>
+            </div>
+          </li>
+        </ul>
+        <div *ngIf="filteredProducts.length === 0" class="no-variations-message">
+          No hay ninguna variación de producto.
+        </div>
+      </div>
+  
+      <div class="variations-list" *ngIf="selectedProduct">
+        <h2>Variaciones de {{ selectedProduct.name }}</h2>
+        <div class="variations-container">
+          <div *ngFor="let variation of variations" class="variation-card">
+            <img [src]="variation.product.imgUrl" alt="{{ variation.product.name }}" />
+            <div class="variation-info">
+              <h3>{{ variation.product.name }}</h3>
+              <p>Precio Final: {{ variation.finalPrice | currency }}</p>
+              <div *ngFor="let option of variation.options" class="option-info">
+                <h4>{{ option.name }}</h4>
+                <p>Precio Base: {{ option.basePrice | currency }}</p>
+                <ul>
+                  <li *ngFor="let characteristic of option.characteristics">
+                    <span class="characteristic-name">{{ characteristic.name }}:</span> <span class="characteristic-price">{{ characteristic.extraPrice | currency }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

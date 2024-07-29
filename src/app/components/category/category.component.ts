@@ -105,7 +105,6 @@ export class CategoryComponent {
       disableClose: true
     });
 
-
     dialogRef.afterClosed().subscribe((newCategory: Category | undefined) => {
       if (newCategory) {
         this.categories.push(newCategory);
@@ -119,7 +118,6 @@ export class CategoryComponent {
       data: { category },
       width: '600px', // Ancho del diálogo
       disableClose: true
-    
     });
 
     dialogRef.afterClosed().subscribe((updatedCategory: Category | undefined) => {
