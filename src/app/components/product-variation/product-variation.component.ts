@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AddProductVariationDialogComponent } from '../../utils/add-product-variation-dialog/add-product-variation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, of } from 'rxjs';
+import { DeleteVariationDialogComponent } from '../../utils/delete-variation-dialog/delete-variation-dialog.component';
 
 @Component({
   selector: 'app-product-variation',
@@ -102,6 +103,25 @@ export class ProductVariationComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loadProductsWithVariations(this.selectedStoreId!);
+      }
+    });
+  }
+
+  deleteVariation(variationId: number): void {
+    const dialogRef = this.dialog.open(DeleteVariationDialogComponent, {
+      data: { name: this.selectedProduct?.name || 'Producto' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.productService.deleteVariation(variationId).subscribe(
+          () => {
+            this.variations = this.variations.filter(v => v.id !== variationId);
+          },
+          error => {
+            console.error('Error deleting variation:', error);
+          }
+        );
       }
     });
   }

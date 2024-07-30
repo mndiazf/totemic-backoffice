@@ -14,7 +14,10 @@ export class ProductService {
   private productVariationsUrl = 'http://localhost:8080/api/products';
   private createOptionUrl = 'http://localhost:8080/api/products/options';
   private createCharacteristicUrl = 'http://localhost:8080/api/products/characteristics';
-
+  private updateOptionUrl = 'http://localhost:8080/api/products/options';
+  private updateCharacteristicUrl = 'http://localhost:8080/api/products/characteristics';
+  private updateVariationUrl = 'http://localhost:8080/api/products/variations';
+  private deleteVariationUrl = 'http://localhost:8080/api/products/variations';
 
   constructor(private http: HttpClient) { }
 
@@ -72,5 +75,25 @@ export class ProductService {
   createProduct(product: Partial<Product>): Observable<Product> { // Partial<Product> para permitir la omisión de algunas propiedades opcionales
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Product>(this.updateProductUrl, product, { headers });
+  }
+
+  updateOption(option: any): Observable<any> {
+    const url = `${this.updateOptionUrl}/${option.id}`;
+    return this.http.put<any>(url, option);
+  }
+
+  updateCharacteristic(characteristic: any): Observable<any> {
+    const url = `${this.updateCharacteristicUrl}/${characteristic.id}`;
+    return this.http.put<any>(url, characteristic);
+  }
+
+  updateProductVariation(variationId: number, variation: any): Observable<any> {
+    const url = `${this.updateVariationUrl}/${variationId}`;
+    return this.http.put<any>(url, variation);
+  }
+
+  deleteVariation(variationId: number): Observable<void> {
+    const url = `${this.deleteVariationUrl}/${variationId}`;
+    return this.http.delete<void>(url);
   }
 }
